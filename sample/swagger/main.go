@@ -10,8 +10,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/favclip/ucon"
-	"github.com/favclip/ucon/swagger"
+	"github.com/koichiroo/ucon"
+	"github.com/koichiroo/ucon/swagger"
 	"golang.org/x/net/context"
 )
 

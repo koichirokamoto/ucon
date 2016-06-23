@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/favclip/ucon"
-	"github.com/favclip/ucon/swagger"
+	"github.com/koichiroo/ucon"
+	"github.com/koichiroo/ucon/swagger"
 	"github.com/mjibson/goon"
 	"golang.org/x/net/context"
 	"google.golang.org/appengine"

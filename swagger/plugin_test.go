@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/favclip/ucon"
+	"github.com/koichiroo/ucon"
 	"golang.org/x/net/context"
 )
 

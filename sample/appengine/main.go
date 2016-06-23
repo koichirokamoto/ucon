@@ -8,8 +8,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/favclip/ucon"
-	"github.com/favclip/ucon/swagger"
+	"github.com/koichiroo/ucon"
+	"github.com/koichiroo/ucon/swagger"
 	"google.golang.org/appengine"
 )
 
