@@ -38,10 +38,40 @@ func TestNetContextDI(t *testing.T) {
 	}
 }
 
+type Wrapper struct {
+	T TargetOfRequestObjectMapper `json:"t"`
+}
+
 type TargetOfRequestObjectMapper struct {
 	ID     int    `json:"id"`
 	Offset int    `json:"offset"`
 	Text   string `json:"text"`
+}
+
+func TestRequestObjectMapperForWrapper(t *testing.T) {
+	b, _ := MakeMiddlewareTestBed(t, RequestObjectMapper(), func(req *Wrapper) {
+    // nestしたものは取得しない
+		if req.T.ID != 0 {
+			t.Errorf("unexpected: %v", req.T.ID)
+		}
+		if req.T.Offset != 0 {
+			t.Errorf("unexpected: %v", req.T.Offset)
+		}
+		if req.T.Text != "Hi!" {
+			t.Errorf("unexpected: %v", req.T.Text)
+		}
+	}, &BubbleTestOption{
+		Method: "POST",
+		URL:    "/api/todo/{id}?offset=10&limit=3",
+		Body:   strings.NewReader("{\"t\":{\"text\":\"Hi!\"}}"),
+	})
+	b.Context = context.WithValue(b.Context, PathParameterKey, map[string]string{
+		"id": "5",
+	})
+	err := b.Next()
+	if err != nil {
+		t.Fatal(err)
+	}
 }
 
 func TestRequestObjectMapper(t *testing.T) {

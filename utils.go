@@ -61,6 +61,9 @@ func valueStringMapper(target reflect.Value, key string, value string) (bool, er
 
 	for i, numField := 0, target.NumField(); i < numField; i++ {
 		sf := target.Type().Field(i)
+		if sf.Type.Kind() == reflect.Ptr || sf.Type.Kind() == reflect.Struct {
+			return true, nil
+		}
 		if NewTagJSON(sf.Tag).Ignored() {
 			continue
 		}
@@ -109,6 +112,9 @@ func valueStringSliceMapper(target reflect.Value, key string, values []string) (
 	nf := target.NumField()
 	for i := 0; i < nf; i++ {
 		sf := target.Type().Field(i)
+		if sf.Type.Kind() == reflect.Ptr || sf.Type.Kind() == reflect.Struct {
+			return true, nil
+		}
 		if NewTagJSON(sf.Tag).Ignored() {
 			continue
 		}
