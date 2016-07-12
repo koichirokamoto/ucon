@@ -582,6 +582,8 @@ func reflectTypeAndFormatToSwaggerTypeString(refT reflect.Type, tag reflect.Stru
 		f = "double"
 	case reflect.String:
 		t = "string"
+	case reflect.Map:
+		t = "map"
 	default:
 		t = ""
 	}
