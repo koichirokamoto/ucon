@@ -1,6 +1,7 @@
 package ucon
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -183,6 +184,10 @@ func RequestObjectMapper() MiddlewareFunc {
 				}
 			}
 		}
+
+		// set request body in order to reuse request body
+		b.R.Body = ioutil.NopCloser(bytes.NewReader(body))
+
 		// NOTE need request body as a=b&c=d style parsing?
 
 		b.Arguments[argIdx] = reqV
